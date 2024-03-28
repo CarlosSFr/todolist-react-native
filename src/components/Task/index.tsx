@@ -7,9 +7,10 @@ import { useState } from "react";
 interface TaskProps {
     text: string,
     onDelete: (taskToDelete: string) => void,
+    onChecked: (taskChecked: boolean) => void,
 }
 
-export function Task({ text, onDelete }: TaskProps){
+export function Task({ text, onDelete, onChecked }: TaskProps){
 
     const [ checked, setChecked ] = useState(false)
 
@@ -19,11 +20,11 @@ export function Task({ text, onDelete }: TaskProps){
 
     function handleCheckCircle(){
         setChecked(!checked)
+        onChecked(!checked)
     }
 
     return (
         <View style={styles.taskContainer} >
-            {/* <CheckCircle color={defaultTheme["purple-dark"]} size={24} /> */}
             <View>
                 <TouchableOpacity onPress={handleCheckCircle} >
                     {checked ? <CheckCircle color={defaultTheme["purple-dark"]} size={24} weight="fill" /> : <Circle color={defaultTheme.blue} size={24} /> }

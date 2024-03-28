@@ -10,6 +10,7 @@ export function Home(){
 
     const [ tasks, setTasks ] = useState<string[]>([]);
     const [ textTask, setTextTask ] = useState('')
+    const [ isChecked, setIsChecked ] = useState(0)
 
     function handleAddNewTask(){
 
@@ -38,7 +39,14 @@ export function Home(){
             }
         ]
         )
+    }
 
+    function handleCheckedTask(tasksChecked: boolean){
+        if(tasksChecked){
+            setIsChecked(state =>  state + 1)
+        }else{
+            setIsChecked(state => state - 1)
+        }
     }
 
     return (
@@ -62,13 +70,13 @@ export function Home(){
                 <View style={styles.textContainer} >
                     <Text style={styles.textOne} >Criadas</Text>
                     <View style={styles.circleValue} >
-                        <Text style={styles.circleText} >0</Text>
+                        <Text style={styles.circleText} >{tasks.length}</Text>
                     </View>
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.textTwo} >Concluídas</Text>
                     <View style={styles.circleValue} >
-                        <Text style={styles.circleText} >0</Text>
+                        <Text style={styles.circleText} >{isChecked}</Text>
                     </View>
                 </View>
             </View>
@@ -80,6 +88,7 @@ export function Home(){
                             key={item}
                             text={item}
                             onDelete={handleRemoveTask}
+                            onChecked={handleCheckedTask}
                         />
                     )}
                 ListEmptyComponent={() => (

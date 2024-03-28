@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     main: {
         backgroundColor: defaultTheme["gray-600"], 
         height: "100%",
-        alignItems: "center"
+        alignItems: "center",
     },
     tasksContainer: {
         width: "86.6%"
