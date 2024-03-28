@@ -80,11 +80,6 @@ export const styles = StyleSheet.create({
         paddingTop: 48,
         gap: 16,
     },
-    todoContainerTask: {
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 16,
-    },
     noTodoText: {
     },
     noTodoTextOne: {

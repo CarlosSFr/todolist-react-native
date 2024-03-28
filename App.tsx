@@ -4,14 +4,14 @@ import { useFonts, Inter_700Bold, Inter_400Regular, Inter_900Black } from "@expo
 import AppLoading from "expo-app-loading";
 
 export default function App() {
-  const [ fontsLoaded ] = useFonts({
-    Inter_400Regular,
-    Inter_700Bold,
-    Inter_900Black,
-})
-if(!fontsLoaded){
-    <AppLoading />
-}
+//   const [ fontsLoaded ] = useFonts({
+//     Inter_400Regular,
+//     Inter_700Bold,
+//     Inter_900Black,
+// })
+// if(!fontsLoaded){
+//     <AppLoading />
+// }
 
   return (
     <>

@@ -1,20 +1,43 @@
-import { FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Header } from "../../components/Header";
 import { defaultTheme } from "../../styles/default";
 import { ClipboardText, PlusCircle } from "phosphor-react-native";
 import { styles } from "./styles";
 import { Task } from "../../components/Task";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export function Home(){
-    // const tasks = ["Shrek is love", "Shrek is life", "mano o uqe escrever entao vou encher de linguiça aqui porra"];
 
     const [ tasks, setTasks ] = useState<string[]>([]);
     const [ textTask, setTextTask ] = useState('')
 
     function handleAddNewTask(){
-       
-        setTasks(state => [...state, textTask]);
+
+        setTasks(state => [...tasks, textTask]);
+
+        setTextTask('');
+
+    }
+
+    function handleRemoveTask(taskToDelete: string){
+        Alert.alert("Remover", "Deseja remover a tarefa?", 
+        [
+            {
+                text: "sim",
+                onPress: () => {
+                    const tasksWithoutDeleted = tasks.filter(task => {
+                        return task !== taskToDelete;
+                    })
+            
+                    setTasks(tasksWithoutDeleted);
+                }
+            },
+            {
+                text: "não",
+                style: "cancel"
+            }
+        ]
+        )
 
     }
 
@@ -28,7 +51,7 @@ export function Home(){
                 style={styles.input}
                 placeholder="Adicione uma nova tarefa"
                 placeholderTextColor={defaultTheme["gray-300"]}
-                onChange={(e) => setTextTask}
+                onChangeText={e => setTextTask(e)}
                 value={textTask}
                 />
                 <TouchableOpacity style={styles.inputButton} onPress={handleAddNewTask} >
@@ -49,15 +72,6 @@ export function Home(){
                     </View>
                 </View>
             </View>
-                {/* <ClipboardText color={defaultTheme["gray-400"]} size={56} />
-                <View style={styles.noTodoText} >
-                    <Text style={styles.noTodoTextOne}>Você ainda não tem tarefas cadastradas</Text>
-                    <Text style={styles.noTodoTextTwo}>Crie tarefas e organize seus itens a fazer</Text>
-                </View>
-                <Task />
-                <Task />
-                <Task />
-                <Task /> */}
                 <FlatList 
                     data={tasks}
                     keyExtractor={item => item}
@@ -65,7 +79,7 @@ export function Home(){
                         <Task 
                             key={item}
                             text={item}
-                            // onRemove={() => handleParticipantRemove(item)}
+                            onDelete={handleRemoveTask}
                         />
                     )}
                 ListEmptyComponent={() => (

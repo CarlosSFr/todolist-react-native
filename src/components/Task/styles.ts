@@ -24,5 +24,12 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         color: defaultTheme["gray-100"],
         width: "80%",
+    },
+    taskTextChecked: {
+        fontFamily: defaultFont.fonts.text,
+        fontSize: 14,
+        color: defaultTheme["gray-300"],
+        width: "80%",
+        textDecorationLine: "line-through",
     }
 })
